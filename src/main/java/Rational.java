@@ -147,15 +147,16 @@ public class Rational
     // Rational r = new Rational(2,5);
     // System.out.println(r.pow(2)) // 4/25
     public Rational pow(int exponent) {
-        for (int i = exponent + 1; i > 0; i--) {
-            this.numerator = this.numerator * this.numerator;
+        int denom = this.denominator;
+        int numer = this.numerator;
+
+        for (int i = exponent; i > 1; i--){
+            this.numerator = this.numerator * numer;
+            this.denominator = this.denominator * denom;
         }
 
-        for (int i = exponent + 1; i > 0; i--) {
-            this.denominator = this.denominator * this.denominator;
-        }
         Rational p = new Rational(this.numerator, this.denominator);
-        return (p); // YOUR CODE HERE
+        return (p);
     }
 
     // Checks to see if either the numerator or denominator match a given number
@@ -272,7 +273,8 @@ public class Rational
     // Rational r = new Rational(5,2);
     // System.out.println(r.reciprocal()) // 2/5
     public Rational reciprocal() {
-        return null; // YOUR CODE HERE
+        Rational t = new Rational(this.denominator, this.numerator);
+        return t;
     }
 
     // Checks whether the current Rational is the exactly the same as other
@@ -281,7 +283,12 @@ public class Rational
     // Rational s = new Rational(2,4);
     // System.out.println(r.equals(s)) // false
     public boolean equals(Rational other) {
-        return false; // YOUR CODE HERE
+        // Rational t = new Rational(this.numerator, this.denominator);
+        if (other.numerator == this.numerator && other.denominator == this.denominator){
+            return true;
+        }
+
+        return false;
     }
 
     // Rounds the current Rational to the nearest whole number value
@@ -289,7 +296,11 @@ public class Rational
     // Rational r = new Rational(3, 2);
     // r.round(); // r is now 2/1
     public void round() {
-        // YOUR CODE HERE
+        double num = (double)this.numerator / this.denominator;
+        num = num + 0.5;
+
+        this.numerator = (int)num;
+        this.denominator = 1;
     }
 }
 
